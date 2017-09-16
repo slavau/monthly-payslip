@@ -1,8 +1,14 @@
 package org.monthly.payslip;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
 
-public class PayslipApplicationTest extends TestCase {
+public class PayslipApplicationTest {
+
+    @Test
+    public void testDummyTest() {
+        assertTrue(true);
+    }
 
 }
