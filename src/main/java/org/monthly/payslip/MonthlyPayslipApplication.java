@@ -27,18 +27,9 @@ public class MonthlyPayslipApplication {
     }
 
     public static void main(String[] args) {
-        if (args.length > 0) {
-            printUsage();
-            System.exit(1);
-        }
-
         MonthlyPayslipGenerator monthlyPayslipGenerator = new MonthlyPayslipGenerator(setupSampleTaxCalculator());
         MonthlyPayslipApplication monthlyPayslipApplication = new MonthlyPayslipApplication(monthlyPayslipGenerator);
         monthlyPayslipApplication.generatePayslip(System.in, System.out);
-    }
-
-    private static void printUsage() {
-        System.out.println("Usage: monthly-payslip takes input from StdIn in the CSV format");
     }
 
     public void generatePayslip(InputStream inputStream, PrintStream outputStream) {

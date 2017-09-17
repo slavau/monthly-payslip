@@ -1,7 +1,7 @@
 # monthly-payslip. MYOB Coding Exercise for MYOB 2017
 
 [![Build Status](https://travis-ci.org/slavau/monthly-payslip.svg?branch=master)](https://travis-ci.org/slavau/monthly-payslip)
-[![Coverage Status](https://coveralls.io/repos/github/slavau/monthly-payslip/badge.svg)](https://coveralls.io/github/slavau/monthly-payslip)
+[![codecov](https://codecov.io/gh/slavau/monthly-payslip/branch/master/graph/badge.svg)](https://codecov.io/gh/slavau/monthly-payslip)
 
 ## Prerequisite
 - Java 8
