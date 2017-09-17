@@ -1,4 +1,4 @@
-package org.monthly.payslip;
+package org.monthly.payslip.domain;
 
 import java.util.Objects;
 
@@ -8,14 +8,14 @@ public class Employee {
     private final String lastName;
     private final int annualSalary;
     private final float superRate;
-    private final String paymentMonth;
+    private final String paymentPeriod;
 
-    public Employee(String firstName, String lastName, int annualSalary, float superRate, String paymentMonth) {
+    public Employee(String firstName, String lastName, int annualSalary, float superRate, String paymentPeriod) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualSalary = annualSalary;
         this.superRate = superRate;
-        this.paymentMonth = paymentMonth;
+        this.paymentPeriod = paymentPeriod;
     }
 
     public Employee(int annualSalary, float superRate) {
@@ -38,8 +38,8 @@ public class Employee {
         return superRate;
     }
 
-    public String getPaymentMonth() {
-        return paymentMonth;
+    public String getPaymentPeriod() {
+        return paymentPeriod;
     }
 
     @Override
@@ -51,11 +51,11 @@ public class Employee {
                 Objects.equals(superRate, employee.superRate) &&
                 Objects.equals(firstName, employee.firstName) &&
                 Objects.equals(lastName, employee.lastName) &&
-                Objects.equals(paymentMonth, employee.paymentMonth);
+                Objects.equals(paymentPeriod, employee.paymentPeriod);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, annualSalary, superRate, paymentMonth);
+        return Objects.hash(firstName, lastName, annualSalary, superRate, paymentPeriod);
     }
 }

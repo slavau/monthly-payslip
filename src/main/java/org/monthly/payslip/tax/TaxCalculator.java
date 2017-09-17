@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class TaxService {
+public class TaxCalculator {
 
     private final Map<TaxableIncome, Tax> taxBracketsReference = new HashMap<>();
 
@@ -21,5 +21,15 @@ public class TaxService {
         }
 
         return Optional.empty();
+    }
+
+    public double calculateIncomeTax(int annualSalary) {
+        Optional<Tax> tax = getTaxFor(annualSalary);
+        if (tax.isPresent()) {
+            Tax taxDetails = tax.get();
+            return taxDetails.getBaseTax() + ((annualSalary - taxDetails.getFromIncome()) * (taxDetails.getPercentage() / 100));
+        } else {
+            return 0;
+        }
     }
 }
