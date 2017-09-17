@@ -30,11 +30,8 @@ public class MonthlyPayslipApplication {
             System.exit(1);
         }
 
-        TaxCalculator taxCalculator = new TaxCalculator();
-        setupTaxBracketsSampleData(taxCalculator);
-        MonthlyPayslipGenerator monthlyPayslipGenerator = new MonthlyPayslipGenerator(taxCalculator);
+        MonthlyPayslipGenerator monthlyPayslipGenerator = new MonthlyPayslipGenerator(setupSampleTaxCalculator());
         MonthlyPayslipApplication monthlyPayslipApplication = new MonthlyPayslipApplication(monthlyPayslipGenerator);
-
         monthlyPayslipApplication.generatePayslip(System.in, System.out);
     }
 
@@ -53,28 +50,35 @@ public class MonthlyPayslipApplication {
 
     private Function<String, Employee> convertToEmployee() {
         return csvLine -> {
-            String[] fields = csvLine.split(",");
-            if (fields.length != 5) {
-                throw new IllegalArgumentException("Wrong format of the CSV input");
-            }
+            String[] fields = readCsvFields(csvLine);
 
-            long annualSalary = Long.parseLong(readField(fields[2]));
-            float superRate = Float.parseFloat(readField(fields[3]).replace("%", ""));
-            return new Employee(readField(fields[0]), readField(fields[1]), annualSalary,
-                    superRate, readField(fields[4]));
+            long annualSalary = Long.parseLong(fieldData(fields[2]));
+            float superRate = Float.parseFloat(fieldData(fields[3]).replace("%", ""));
+            return new Employee(fieldData(fields[0]), fieldData(fields[1]), annualSalary,
+                    superRate, fieldData(fields[4]));
         };
     }
 
-    private String readField(String field) {
+    private String[] readCsvFields(String csvLine) {
+        String[] fields = csvLine.split(",");
+        if (fields.length != 5) {
+            throw new IllegalArgumentException("Wrong format of the CSV input");
+        }
+        return fields;
+    }
+
+    private String fieldData(String field) {
         return field.trim();
     }
 
-    private static void setupTaxBracketsSampleData(TaxCalculator taxCalculator) {
+    private static TaxCalculator setupSampleTaxCalculator() {
+        TaxCalculator taxCalculator = new TaxCalculator();
         // If this was a Spring boot cli app the following would come form Configuration.
         taxCalculator.addTax(0, 18200, 0, 0);
         taxCalculator.addTax(18201, 37000, 0, 19);
         taxCalculator.addTax(37001, 80000, 3572, 32.5f);
         taxCalculator.addTax(80001, 180000, 17547, 37f);
         taxCalculator.addTax(180001, Long.MAX_VALUE, 54547, 45f);
+        return taxCalculator;
     }
 }
