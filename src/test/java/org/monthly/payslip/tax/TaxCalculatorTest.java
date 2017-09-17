@@ -16,7 +16,7 @@ public class TaxCalculatorTest {
         taxCalculator.addTax(18201, 37000, 0, 19);
         taxCalculator.addTax(37001, 80000, 3572, 32.5f);
         taxCalculator.addTax(80001, 180000, 17547, 37f);
-        taxCalculator.addTax(180001, Integer.MAX_VALUE, 54547, 45f);
+        taxCalculator.addTax(180001, Long.MAX_VALUE, 54547, 45f);
     }
 
     @Test

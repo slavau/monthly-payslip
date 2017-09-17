@@ -1,12 +1,18 @@
 package org.monthly.payslip.tax;
 
+/**
+ * Object containing tax data. Used to calculate income tax.
+ * <p>
+ * All the amount are represented as integers, hence the limitation.
+ * More info see: https://en.wikipedia.org/wiki/Income_tax_in_Australia#Personal_income_tax
+ */
 public class Tax {
 
     private final float baseTax;
     private final float percentage;
-    private final int fromIncome;
+    private final long fromIncome;
 
-    public Tax(float baseTax, float percentage, int fromIncome) {
+    public Tax(float baseTax, float percentage, long fromIncome) {
         this.baseTax = baseTax;
         this.percentage = percentage;
         this.fromIncome = fromIncome;
@@ -20,7 +26,7 @@ public class Tax {
         return percentage;
     }
 
-    public int getFromIncome() {
+    public long getFromIncome() {
         return fromIncome;
     }
 }

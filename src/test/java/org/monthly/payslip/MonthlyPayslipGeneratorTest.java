@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class MonthlyPayslipGeneratorTest {
 
-    private static final int ANNUAL_SALARY = 60050;
+    private static final long ANNUAL_SALARY = 60050;
 
     @InjectMocks
     private MonthlyPayslipGenerator monthlyPayslipGenerator;
@@ -28,7 +28,7 @@ public class MonthlyPayslipGeneratorTest {
     public void testGenerateWillCalculateGrossIncomeForSuppliedSalary() {
         PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
-        assertThat(payslipDetails.getGrossIncome(), is(5004));
+        assertThat(payslipDetails.getGrossIncome(), is(5004L));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class MonthlyPayslipGeneratorTest {
 
         PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
-        assertThat(payslipDetails.getIncomeTax(), is(922));
+        assertThat(payslipDetails.getIncomeTax(), is(922L));
     }
 
     @Test
@@ -46,20 +46,20 @@ public class MonthlyPayslipGeneratorTest {
 
         PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
-        assertThat(payslipDetails.getNetIncome(), is(4082));
+        assertThat(payslipDetails.getNetIncome(), is(4082L));
     }
 
     @Test
     public void testGenerateWillCalculateSuperForSuppliedSalary() {
         PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
-        assertThat(payslipDetails.getSuperAmount(), is(450));
+        assertThat(payslipDetails.getSuperAmount(), is(450L));
     }
 
     @Test
     public void testGenerateWillCalculateNoSuperWhenSuperRateIsZero() {
         PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 0f));
 
-        assertThat(payslipDetails.getSuperAmount(), is(0));
+        assertThat(payslipDetails.getSuperAmount(), is(0L));
     }
 }

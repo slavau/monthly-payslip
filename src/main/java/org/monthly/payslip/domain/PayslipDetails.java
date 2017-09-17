@@ -3,18 +3,21 @@ package org.monthly.payslip.domain;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Monthly payslip details calculated based on an employee data.
+ */
 public class PayslipDetails {
 
     private final String paymentPeriod;
     private final String employeeFirstName;
     private final String employeeLastName;
-    private final int incomeTax;
-    private final int grossIncome;
-    private final int netIncome;
-    private final int superAmount;
+    private final long incomeTax;
+    private final long grossIncome;
+    private final long netIncome;
+    private final long superAmount;
 
     public PayslipDetails(String paymentPeriod, String employeeFirstName, String employeeLastName,
-                          int grossIncome, int incomeTax, int netIncome, int superAmount) {
+                          long grossIncome, long incomeTax, long netIncome, long superAmount) {
         this.paymentPeriod = paymentPeriod;
         this.employeeFirstName = employeeFirstName;
         this.employeeLastName = employeeLastName;
@@ -24,22 +27,25 @@ public class PayslipDetails {
         this.superAmount = superAmount;
     }
 
-    public int getGrossIncome() {
-        return grossIncome;
-    }
-
-    public int getIncomeTax() {
+    public long getIncomeTax() {
         return incomeTax;
     }
 
-    public int getNetIncome() {
+    public long getGrossIncome() {
+        return grossIncome;
+    }
+
+    public long getNetIncome() {
         return netIncome;
     }
 
-    public int getSuperAmount() {
+    public long getSuperAmount() {
         return superAmount;
     }
 
+    /**
+     * Converts into CSV format to be returned to user. NOTE: does not handle commas already in the fields.
+     */
     public String toCsv() {
         return Stream.of(employeeFirstName, employeeLastName, paymentPeriod, grossIncome, incomeTax, netIncome, superAmount)
                 .map(Object::toString)

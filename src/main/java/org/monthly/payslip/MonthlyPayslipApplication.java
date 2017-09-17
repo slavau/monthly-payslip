@@ -9,6 +9,13 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.function.Function;
 
+/**
+ * Generates and displays monthly payslips for provided employees.
+ * <p>
+ * It accepts multiline input in the CSV format from StdIn and prints output in the CSV format to StdOut.
+ * <p>
+ * It only configures/supports TaxRates for 2012-13 financial year. see more: https://en.wikipedia.org/wiki/Income_tax_in_Australia#Personal_income_tax
+ */
 public class MonthlyPayslipApplication {
 
     private MonthlyPayslipGenerator monthlyPayslipGenerator;
@@ -42,7 +49,6 @@ public class MonthlyPayslipApplication {
                 .map(convertToEmployee())
                 .map(monthlyPayslipGenerator::generate)
                 .forEach(payslipDetails -> outputStream.println(payslipDetails.toCsv()));
-
     }
 
     private Function<String, Employee> convertToEmployee() {
@@ -52,7 +58,7 @@ public class MonthlyPayslipApplication {
                 throw new IllegalArgumentException("Wrong format of the CSV input");
             }
 
-            int annualSalary = Integer.parseInt(readField(fields[2]));
+            long annualSalary = Long.parseLong(readField(fields[2]));
             float superRate = Float.parseFloat(readField(fields[3]).replace("%", ""));
             return new Employee(readField(fields[0]), readField(fields[1]), annualSalary,
                     superRate, readField(fields[4]));
@@ -69,6 +75,6 @@ public class MonthlyPayslipApplication {
         taxCalculator.addTax(18201, 37000, 0, 19);
         taxCalculator.addTax(37001, 80000, 3572, 32.5f);
         taxCalculator.addTax(80001, 180000, 17547, 37f);
-        taxCalculator.addTax(180001, Integer.MAX_VALUE, 54547, 45f);
+        taxCalculator.addTax(180001, Long.MAX_VALUE, 54547, 45f);
     }
 }

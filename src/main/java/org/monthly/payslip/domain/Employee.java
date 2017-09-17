@@ -2,15 +2,21 @@ package org.monthly.payslip.domain;
 
 import java.util.Objects;
 
+/**
+ * Employee domain object contains information about employee received from user input.
+ * <p>
+ * annualSalary value must be above 0
+ * paymentPeriod is not being used in the calculations so we will just store String value unchanged
+ */
 public class Employee {
 
     private final String firstName;
     private final String lastName;
-    private final int annualSalary;
+    private final long annualSalary;
     private final float superRate;
     private final String paymentPeriod;
 
-    public Employee(String firstName, String lastName, int annualSalary, float superRate, String paymentPeriod) {
+    public Employee(String firstName, String lastName, long annualSalary, float superRate, String paymentPeriod) {
         validateSalary(annualSalary);
 
         this.firstName = firstName;
@@ -20,11 +26,11 @@ public class Employee {
         this.paymentPeriod = paymentPeriod;
     }
 
-    public Employee(int annualSalary, float superRate) {
+    public Employee(long annualSalary, float superRate) {
         this("", "", annualSalary, superRate, "");
     }
 
-    private void validateSalary(int annualSalary) {
+    private void validateSalary(long annualSalary) {
         if (annualSalary <= 0) {
             throw new IllegalArgumentException("Employees annual salary must be greater than 0");
         }
@@ -38,7 +44,7 @@ public class Employee {
         return lastName;
     }
 
-    public int getAnnualSalary() {
+    public long getAnnualSalary() {
         return annualSalary;
     }
 
