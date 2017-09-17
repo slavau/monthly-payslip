@@ -11,13 +11,13 @@
 1. Clone the project
 
 2. Build using the following command from project root:
-> ./gradlew clean build
+   > ./gradlew clean build
 
 3. Go to the following folder:
-> cd build/libs/
+   > cd build/libs/
 
 4. To run for a single line input (Linux\MacOS):
-> echo "David,Rudd,60050,9%,01 March – 31 March" | java -jar monthly-payslip-1.0.jar
+   > echo "David,Rudd,60050,9%,01 March – 31 March" | java -jar monthly-payslip-1.0.jar
 
 5. To run for a multi line input (Linux\MacOS):
     5.1 prepare a file containing multiple lines of the epmloyees data in the CSV format, e.g.:
