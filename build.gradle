@@ -3,6 +3,7 @@ apply plugin: 'idea'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
+apply plugin: 'jacoco'
 
 repositories {
     mavenCentral()
@@ -14,8 +15,6 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 version = '1.0'
 
 jar {
@@ -24,6 +23,15 @@ jar {
     }
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+}
+
+check.dependsOn jacocoTestReport
+
 findbugs {
     excludeFilter = 'findbugs-exclude.xml' as File
 }
@@ -31,3 +39,6 @@ findbugs {
 checkstyle {
     configFile = 'checkstyle.xml' as File
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
