@@ -1,6 +1,6 @@
 # monthly-payslip
 
-https://travis-ci.org/slavau/monthly-payslip.svg?branch=master
+[![Build Status](https://travis-ci.org/slavau/monthly-payslip.svg?branch=master)](https://travis-ci.org/slavau/monthly-payslip)
 
 ## Quick start
 
