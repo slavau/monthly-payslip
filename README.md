@@ -30,6 +30,8 @@
 
 By default, application output goes to StdOut in the CSV format. Can be easily redirected to a file for further processing
 
+![Alt text](sample-output.png?raw=true "Sample output")
+
 ## Assumptions
 
 * Calculations are only done for complete months. Partial calculations, like per day or per week or since a specific day during the month are not supported in this version
