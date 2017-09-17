@@ -1,6 +1,7 @@
 # monthly-payslip
 
 [![Build Status](https://travis-ci.org/slavau/monthly-payslip.svg?branch=master)](https://travis-ci.org/slavau/monthly-payslip)
+[![Coverage Status](https://coveralls.io/repos/github/slavau/monthly-payslip/badge.svg)](https://coveralls.io/github/slavau/monthly-payslip)
 
 ## Quick start
 
