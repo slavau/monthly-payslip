@@ -1,5 +1,7 @@
 # monthly-payslip
 
+https://travis-ci.org/slavau/monthly-payslip.svg?branch=master
+
 ## Quick start
 
 1. Check out the project
