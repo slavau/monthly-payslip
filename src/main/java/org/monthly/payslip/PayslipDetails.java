@@ -1,6 +1,9 @@
 package org.monthly.payslip;
 
 import java.util.Date;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PayslipDetails {
 
@@ -42,5 +45,27 @@ public class PayslipDetails {
 
     public int getSuperAmount() {
         return superAmount;
+    }
+
+    public String toCsv() {
+        return Stream.of(grossIncome, incomeTax, netIncome, superAmount)
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PayslipDetails that = (PayslipDetails) o;
+        return Objects.equals(incomeTax, that.incomeTax) &&
+                Objects.equals(grossIncome, that.grossIncome) &&
+                Objects.equals(netIncome, that.netIncome) &&
+                Objects.equals(superAmount, that.superAmount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(incomeTax, grossIncome, netIncome, superAmount);
     }
 }

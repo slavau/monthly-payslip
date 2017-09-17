@@ -3,7 +3,6 @@ package org.monthly.payslip;
 import org.monthly.payslip.tax.Tax;
 import org.monthly.payslip.tax.TaxService;
 
-import java.util.Date;
 import java.util.Optional;
 
 public class PayslipGenerator {
@@ -16,11 +15,11 @@ public class PayslipGenerator {
         this.taxService = taxService;
     }
 
-    public PayslipDetails generateFor(int annualSalary, float superRate, Date paymentStartDate) {
-        double grossIncome = calculateGrossIncome(annualSalary);
-        double incomeTax = calculateIncomeTax(annualSalary);
+    public PayslipDetails generate(Employee employee) {
+        double grossIncome = calculateGrossIncome(employee.getAnnualSalary());
+        double incomeTax = calculateIncomeTax(employee.getAnnualSalary());
         double netIncome = grossIncome - incomeTax;
-        double superAmount = calculateSuperAmount(superRate, grossIncome);
+        double superAmount = calculateSuperAmount(employee.getSuperRate(), grossIncome);
         return new PayslipDetails(null, null, (int)grossIncome, (int)incomeTax, (int)netIncome, (int)superAmount);
     }
 

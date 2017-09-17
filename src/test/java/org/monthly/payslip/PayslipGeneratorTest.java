@@ -27,7 +27,7 @@ public class PayslipGeneratorTest {
 
     @Test
     public void testGenerateWillCalculateGrossIncomeForSuppliedSalary() {
-        PayslipDetails payslipDetails = payslipGenerator.generateFor(ANNUAL_SALARY, 9.0f, null);
+        PayslipDetails payslipDetails = payslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
         assertThat(payslipDetails.getGrossIncome(), is(5004));
     }
@@ -36,14 +36,14 @@ public class PayslipGeneratorTest {
     public void testGenerateWillCalculateIncomeTaxForSuppliedSalary() {
         when(taxService.getTaxFor(ANNUAL_SALARY)).thenReturn(Optional.of(new Tax(3572, 32.5f, 37000)));
 
-        PayslipDetails payslipDetails = payslipGenerator.generateFor(ANNUAL_SALARY, 9.0f, null);
+        PayslipDetails payslipDetails = payslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
         assertThat(payslipDetails.getIncomeTax(), is(922));
     }
 
     @Test
     public void testGenerateWillReturnZeroIncomeTaxWhenSalaryIsNotTaxable() {
-        PayslipDetails payslipDetails = payslipGenerator.generateFor(15000, 9.0f, null);
+        PayslipDetails payslipDetails = payslipGenerator.generate(new Employee(15000, 9.0f));
 
         assertThat(payslipDetails.getIncomeTax(), is(0));
     }
@@ -52,7 +52,7 @@ public class PayslipGeneratorTest {
     public void testGenerateWillCalculateNetIncomeForSuppliedSalary() {
         when(taxService.getTaxFor(ANNUAL_SALARY)).thenReturn(Optional.of(new Tax(3572, 32.5f, 37000)));
 
-        PayslipDetails payslipDetails = payslipGenerator.generateFor(ANNUAL_SALARY, 9.0f, null);
+        PayslipDetails payslipDetails = payslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
         assertThat(payslipDetails.getNetIncome(), is(4082));
     }
@@ -61,7 +61,7 @@ public class PayslipGeneratorTest {
     public void testGenerateWillCalculateSuperForSuppliedSalary() {
         when(taxService.getTaxFor(ANNUAL_SALARY)).thenReturn(Optional.of(new Tax(3572, 32.5f, 37000)));
 
-        PayslipDetails payslipDetails = payslipGenerator.generateFor(ANNUAL_SALARY, 9.0f, null);
+        PayslipDetails payslipDetails = payslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
         assertThat(payslipDetails.getSuperAmount(), is(450));
     }

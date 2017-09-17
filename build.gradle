@@ -11,9 +11,12 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.10.0'
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '1.0'
 jar {
     manifest {
-        //attributes 'Main-Class': 'net.petrikainulainen.gradle.HelloWorld'
+        attributes 'Main-Class': 'org.monthly.payslip.PayslipApplication'
     }
 }
 
