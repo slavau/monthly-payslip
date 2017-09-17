@@ -27,6 +27,7 @@ public class MonthlyPayslipApplication {
     }
 
     public static void main(String[] args) {
+        // If this was a Spring boot app the following would be done using Spring dependency injection mechanism.
         MonthlyPayslipGenerator monthlyPayslipGenerator = new MonthlyPayslipGenerator(setupSampleTaxCalculator());
         MonthlyPayslipApplication monthlyPayslipApplication = new MonthlyPayslipApplication(monthlyPayslipGenerator);
         monthlyPayslipApplication.generatePayslip(System.in, System.out);
