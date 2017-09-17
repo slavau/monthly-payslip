@@ -17,6 +17,6 @@ version = '1.0'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'org.monthly.payslip.PayslipApplication'
+        attributes 'Main-Class': 'org.monthly.payslip.MonthlyPayslipApplication'
     }
 }
