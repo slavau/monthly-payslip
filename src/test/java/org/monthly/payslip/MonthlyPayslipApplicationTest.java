@@ -11,6 +11,7 @@ import org.monthly.payslip.domain.PayslipDetails;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.charset.Charset;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
@@ -37,7 +38,7 @@ public class MonthlyPayslipApplicationTest {
 
         monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
 
-        assertThat(new String(byteArrayOutputStream.toByteArray()), is("David,Rudd,01 March – 31 March,5004,922,4082,450\n"));
+        assertThat(byteArrayOutputStream.toString(), is("David,Rudd,01 March – 31 March,5004,922,4082,450\n"));
     }
 
     @Test
@@ -47,12 +48,12 @@ public class MonthlyPayslipApplicationTest {
         when(monthlyPayslipGenerator.generate(new Employee("Ryan", "Chen", 120000, 10f, "01 March – 31 March")))
                 .thenReturn(new PayslipDetails("01 March – 31 March", "Ryan", "Chen", 10000, 2696, 7304, 1000));
 
-        ByteArrayInputStream inputStream = createStringInputStream("David,Rudd,60050,9%,01 March – 31 March","Ryan,Chen,120000,10,01 March – 31 March");
+        ByteArrayInputStream inputStream = createStringInputStream("David,Rudd,60050,9%,01 March – 31 March", "Ryan,Chen,120000,10,01 March – 31 March");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
 
-        assertThat(new String(byteArrayOutputStream.toByteArray()), is("David,Rudd,01 March – 31 March,5004,922,4082,450\nRyan,Chen,01 March – 31 March,10000,2696,7304,1000\n"));
+        assertThat(byteArrayOutputStream.toString(), is("David,Rudd,01 March – 31 March,5004,922,4082,450\nRyan,Chen,01 March – 31 March,10000,2696,7304,1000\n"));
     }
 
     @Test
@@ -62,7 +63,7 @@ public class MonthlyPayslipApplicationTest {
 
         monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
 
-        assertThat(new String(byteArrayOutputStream.toByteArray()), is(""));
+        assertThat(byteArrayOutputStream.toString(), is(""));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -73,7 +74,7 @@ public class MonthlyPayslipApplicationTest {
         monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
     }
 
-    private ByteArrayInputStream createStringInputStream(String ...inputLines) {
-        return new ByteArrayInputStream(stream(inputLines).collect(Collectors.joining("\n")).getBytes());
+    private ByteArrayInputStream createStringInputStream(String... inputLines) {
+        return new ByteArrayInputStream(stream(inputLines).collect(Collectors.joining("\n")).getBytes(Charset.defaultCharset()));
     }
 }

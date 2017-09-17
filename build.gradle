@@ -1,5 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 repositories {
     mavenCentral()
@@ -19,4 +22,12 @@ jar {
     manifest {
         attributes 'Main-Class': 'org.monthly.payslip.MonthlyPayslipApplication'
     }
+}
+
+findbugs {
+    excludeFilter = 'findbugs-exclude.xml' as File
+}
+
+checkstyle {
+    configFile = 'checkstyle.xml' as File
 }

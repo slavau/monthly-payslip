@@ -38,6 +38,6 @@ public class MonthlyPayslipGenerator {
     }
 
     private long calculateGrossIncome(long annualSalary) {
-        return Math.round(annualSalary / MONTHS_IN_YEAR);
+        return Math.round((double) annualSalary / MONTHS_IN_YEAR);
     }
 }

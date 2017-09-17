@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.function.Function;
 
+import static java.nio.charset.Charset.defaultCharset;
+
 /**
  * Generates and displays monthly payslips for provided employees.
  * <p>
@@ -40,7 +42,7 @@ public class MonthlyPayslipApplication {
     }
 
     public void generatePayslip(InputStream inputStream, PrintStream outputStream) {
-        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, defaultCharset()));
         in.lines()
                 .filter(line -> !line.isEmpty())
                 .map(convertToEmployee())

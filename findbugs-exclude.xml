@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- does not matter in the tests -->
+    <Match>
+        <Class name="org.monthly.payslip.MonthlyPayslipApplicationTest"/>
+        <Bug pattern="DM_DEFAULT_ENCODING"/>
+    </Match>
+</FindBugsFilter>
