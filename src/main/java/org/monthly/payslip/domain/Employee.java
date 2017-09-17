@@ -11,6 +11,8 @@ public class Employee {
     private final String paymentPeriod;
 
     public Employee(String firstName, String lastName, int annualSalary, float superRate, String paymentPeriod) {
+        validateSalary(annualSalary);
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualSalary = annualSalary;
@@ -20,6 +22,12 @@ public class Employee {
 
     public Employee(int annualSalary, float superRate) {
         this("", "", annualSalary, superRate, "");
+    }
+
+    private void validateSalary(int annualSalary) {
+        if (annualSalary <= 0) {
+            throw new IllegalArgumentException("Employees annual salary must be greater than 0");
+        }
     }
 
     public String getFirstName() {

@@ -51,10 +51,15 @@ public class MonthlyPayslipGeneratorTest {
 
     @Test
     public void testGenerateWillCalculateSuperForSuppliedSalary() {
-        when(taxCalculator.calculateIncomeTax(ANNUAL_SALARY)).thenReturn(11063.25);
-
         PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 9.0f));
 
         assertThat(payslipDetails.getSuperAmount(), is(450));
+    }
+
+    @Test
+    public void testGenerateWillCalculateNoSuperWhenSuperRateIsZero() {
+        PayslipDetails payslipDetails = monthlyPayslipGenerator.generate(new Employee(ANNUAL_SALARY, 0f));
+
+        assertThat(payslipDetails.getSuperAmount(), is(0));
     }
 }

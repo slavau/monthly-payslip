@@ -47,12 +47,30 @@ public class MonthlyPayslipApplicationTest {
         when(monthlyPayslipGenerator.generate(new Employee("Ryan", "Chen", 120000, 10f, "01 March – 31 March")))
                 .thenReturn(new PayslipDetails("01 March – 31 March", "Ryan", "Chen", 10000, 2696, 7304, 1000));
 
-        ByteArrayInputStream inputStream = createStringInputStream("David,Rudd,60050,9%,01 March – 31 March","Ryan,Chen,120000,10%,01 March – 31 March");
+        ByteArrayInputStream inputStream = createStringInputStream("David,Rudd,60050,9%,01 March – 31 March","Ryan,Chen,120000,10,01 March – 31 March");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
 
         assertThat(new String(byteArrayOutputStream.toByteArray()), is("David,Rudd,01 March – 31 March,5004,922,4082,450\nRyan,Chen,01 March – 31 March,10000,2696,7304,1000\n"));
+    }
+
+    @Test
+    public void testHandlesEmptyInput() {
+        ByteArrayInputStream inputStream = createStringInputStream("", "");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
+
+        assertThat(new String(byteArrayOutputStream.toByteArray()), is(""));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testThrowsExceptionWhenCsvFormatIsWrong() {
+        ByteArrayInputStream inputStream = createStringInputStream("1,2,3,4");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        monthlyPayslipApplication.generatePayslip(inputStream, new PrintStream(byteArrayOutputStream));
     }
 
     private ByteArrayInputStream createStringInputStream(String ...inputLines) {

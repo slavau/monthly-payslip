@@ -14,12 +14,11 @@ public class TaxCalculator {
 
     public double calculateIncomeTax(int annualSalary) {
         Optional<Tax> tax = getTaxFor(annualSalary);
-        if (tax.isPresent()) {
-            Tax taxDetails = tax.get();
-            return taxDetails.getBaseTax() + ((annualSalary - taxDetails.getFromIncome()) * (taxDetails.getPercentage() / 100));
-        } else {
-            return 0;
+        if (!tax.isPresent()) {
+            throw new IllegalStateException(String.format("Could not file tax for '%s' income", annualSalary));
         }
+        Tax taxDetails = tax.get();
+        return taxDetails.getBaseTax() + ((annualSalary - taxDetails.getFromIncome()) * (taxDetails.getPercentage() / 100));
     }
 
     private Optional<Tax> getTaxFor(int income) {

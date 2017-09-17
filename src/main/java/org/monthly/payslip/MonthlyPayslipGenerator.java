@@ -28,14 +28,10 @@ public class MonthlyPayslipGenerator {
     }
 
     private long calculateSuperAmount(float superRate, double grossIncome) {
-        return Math.round(grossIncome * getPercentageRate(superRate));
+        return Math.round(grossIncome * (superRate / 100));
     }
 
     private double calculateGrossIncome(int annualSalary) {
         return Math.round(annualSalary / MONTHS_IN_YEAR);
-    }
-
-    private float getPercentageRate(float rate) {
-        return rate == 0 ? 1 : rate / 100;
     }
 }
