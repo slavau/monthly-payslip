@@ -1,4 +1,4 @@
-# monthly-payslip. MYOB Coding Exercise for MYOB 2017
+# monthly-payslip
 
 [![Build Status](https://travis-ci.org/slavau/monthly-payslip.svg?branch=master)](https://travis-ci.org/slavau/monthly-payslip)
 [![codecov](https://codecov.io/gh/slavau/monthly-payslip/branch/master/graph/badge.svg)](https://codecov.io/gh/slavau/monthly-payslip)
