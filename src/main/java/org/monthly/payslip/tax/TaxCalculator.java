@@ -38,11 +38,9 @@ public class TaxCalculator {
     }
 
     private Optional<Tax> getTaxFor(long income) {
-        for (Map.Entry<TaxableIncome, Tax> taxReference : taxBracketsReference.entrySet()) {
-            if (taxReference.getKey().isWithinRange(income)) {
-                return Optional.of(taxReference.getValue());
-            }
-        }
-        return Optional.empty();
+        return taxBracketsReference.entrySet().stream()
+                .filter(taxableIncomeTaxEntry -> taxableIncomeTaxEntry.getKey().isWithinRange(income))
+                .map(Map.Entry::getValue)
+                .findAny();
     }
 }
